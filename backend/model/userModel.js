@@ -29,6 +29,17 @@ const userSchema = new Schema({
         type: String,
         required: [true, "Adress must be provided"]
     },
+    otp:{
+        type: Number,
+        select: true,
+      
+    },
+    isOtpVerified:{
+        type: Boolean,
+        default: false,
+        select: true,
+       
+    },
     Role:{
         type: String,
         enum: ['admin','user'],
