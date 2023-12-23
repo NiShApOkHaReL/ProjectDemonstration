@@ -8,8 +8,8 @@ const Navbar = () => {
         <div className="text-white font-bold text-xl">Smart Municipality</div>
         <div className="space-x-4">
           <NavLink to="/" label="Home" />
-          <NavLink to="/report-problem" label="Report Problem" />
-          <NavLink to="/view-report" label="View Your Report" />
+          <NavLink to="/Report" label="Report Problem" />
+          <NavLink to="/ViewReport" label="View Your Report" />
           <NavLink to="/help" label="Help" />
           <button className="text-white" onClick={() => console.log('Logout clicked')}>
             Logout
