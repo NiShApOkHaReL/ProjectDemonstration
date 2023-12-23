@@ -2,7 +2,7 @@ const Reports = require("../../model/reportsModel")
 
 exports.reportProblem = async(req,res)=>{
     const {emergencyStatus, problemCategory, problemDescription, latitude, longitude,status, problemAddress } = req.body
-    console.log(emergencyStatus)
+    
     const file = req.file
     let filePath
     if(!file){
