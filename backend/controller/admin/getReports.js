@@ -9,7 +9,7 @@ exports.getReports= async(req,res)=>{
         })
     }
     res.status(200).json({
-        message : "Orders Fetched Successfully",
+        message : "Reports Fetched Successfully",
         data : reports
     })
 }
