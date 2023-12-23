@@ -10,7 +10,7 @@ const isAuthenticated = async (req,res,next)=>{
             message : "Please login"
         })
     }
-    console.log(token)
+    
     
   try {
     const decoded = await promisify(jwt.verify)(token,process.env.SECRETKEY)

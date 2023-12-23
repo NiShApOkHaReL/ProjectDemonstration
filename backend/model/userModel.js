@@ -28,6 +28,11 @@ const userSchema = new Schema({
     userAddress: {
         type: String,
         required: [true, "Adress must be provided"]
+    },
+    Role:{
+        type: String,
+        enum: ['admin','user'],
+        default: 'user'
     }
 },{
     timestamps: true
