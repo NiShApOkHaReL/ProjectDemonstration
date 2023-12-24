@@ -1,11 +1,8 @@
 
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
-<<<<<<< HEAD
 const User = require("../../model/userModel")
-=======
 const sendEmail = require("../../services/sendEmail")
->>>>>>> b1b4523f15ecddfa5b3e58c0053253739ded3f54
 
 
 exports.registerUser = async(req,res) =>{
