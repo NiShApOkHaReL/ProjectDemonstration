@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { NavLink as ReactRouterNavLink } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
-import 'google-fonts';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import "google-fonts";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -19,19 +19,40 @@ const Navbar = () => {
   return (
     <nav className="bg-purple-600 p-3 md:p-9">
       <div className="container mx-auto flex justify-between items-center">
-      <div className="text-white font-bold text-2xl md:text-3xl lg:text-4xl font-serif">
-  Smart Municipality
-</div>
+        <div className="text-white font-bold text-2xl md:text-3xl lg:text-4xl font-serif">
+          Smart Municipality
+        </div>
         <div className="hidden md:flex space-x-4">
-          <ButtonLink to="/" label="Home" className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 border border-red-700 rounded-full transition-all duration-300"/>
-          <ButtonLink to="/Report" label="Report Problem" className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 border border-red-700 rounded-full transition-all duration-300"/>
-          <ButtonLink to="/ViewReport" label="View Your Report" className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 border border-red-700 rounded-full transition-all duration-300"/>
-          <ButtonLink to="/help" label="Help" className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 border border-red-700 rounded-full transition-all duration-300"/>
-          <ButtonLink
-            to="/logout"
-            label="Logout"
+          <Link
+            to="/"
             className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 border border-red-700 rounded-full transition-all duration-300"
-          />
+          >
+            Home
+          </Link>
+          <Link
+            to="/Report"
+            className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 border border-red-700 rounded-full transition-all duration-300"
+          >
+            Report Problem
+          </Link>
+          <Link
+            to="/ViewReport"
+            className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 border border-red-700 rounded-full transition-all duration-300"
+          >
+            View Your Report
+          </Link>
+          <Link
+            to="/help"
+            className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 border border-red-700 rounded-full transition-all duration-300"
+          >
+            Help
+          </Link>
+          <Link
+            to="/logout"
+            className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 border border-red-700 rounded-full transition-all duration-300"
+          >
+            Logout
+          </Link>
         </div>
         {/* Add a responsive menu button for small screens */}
         <div className="md:hidden">
@@ -53,37 +74,18 @@ const Navbar = () => {
           </button>
           {isMenuOpen && (
             <div className="flex flex-col items-center mt-2">
-              <ButtonLink to="/" label="Home" />
-              <ButtonLink to="/Report" label="Report Problem" />
-              <ButtonLink to="/ViewReport" label="View Your Report" />
-              <ButtonLink to="/help" label="Help" />
-              <ButtonLink
-                to="/logout"
-                label="Logout"
-                className="text-white hover:underline"
-              />
+              
+              <Link to="/">Home</Link>
+              <Link to="/Report">Report Problem</Link>
+              <Link to="/ViewReport">View Your Report</Link>
+              <Link to="/help">Help</Link>
+              <Link to = "/logout" className="text-white hover:underline">Logout</Link>
+              
             </div>
           )}
         </div>
       </div>
     </nav>
-  );
-};
-
-const ButtonLink = ({ to, label, className }) => {
-  const history = useNavigate();
-
-  const navigateTo = (path) => {
-    history(path);
-  };
-
-  return (
-    <button
-      onClick={() => navigateTo(to)}
-      className={`text-white ${className}`}
-    >
-      {label}
-    </button>
   );
 };
 

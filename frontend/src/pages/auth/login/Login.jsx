@@ -1,20 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 // import { useHistory } from 'react-router-dom';
-
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   // const history = useHistory(); // Add this line to get the history object
-
-
+  const navigate = useNavigate();
 
   const handleLogin = async () => {
     try {
-      const response = await fetch('http://localhost:4000/api/login', {
-        method: 'POST',
+      const response = await fetch("http://localhost:4000/api/login", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ email, password }),
       });
@@ -25,21 +24,18 @@ const Login = () => {
         const token = data.data;
 
         // Store the token in localStorage or a state management solution
-        localStorage.setItem('token', token);
+        localStorage.setItem("token", token);
 
         // Redirect or perform any other action after successful login
-        console.log('Login successful');
-         // Redirect to the main page after successful login
-        //  history.push('/'); // Replace with your main page route
-        history.push('/'); 
+        console.log("Login successful");
         
-      
+        navigate("/");
       } else {
         const errorData = await response.json();
-        console.error('Login failed:', errorData.message);
+        console.error("Login failed:", errorData.message);
       }
     } catch (error) {
-      console.error('Error during login:', error.message);
+      console.error("Error during login:", error.message);
     }
   };
 
