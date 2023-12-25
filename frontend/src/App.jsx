@@ -8,7 +8,7 @@ import Home from './pages/home/Home'
 import Report from './pages/user/Report'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import ViewReport from './pages/user/ViewReport'
-import Help from './pages/user/Help'
+import AboutUs from './pages/user/AboutUs'
 
 function App() {
   
@@ -24,7 +24,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/report/*" element={<Report />} />
           <Route path="/ViewReport" element={<ViewReport />} />
-          <Route path="/Help" element={<Help/>} />
+          <Route path="/AboutUs" element={<AboutUs/>} />
         </Routes>
         <Footer />
       </div>

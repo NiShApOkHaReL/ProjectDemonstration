@@ -1,126 +1,19 @@
-
-
-// Report.js
-import React, { useState } from 'react';
-import { Route, Routes, Link, Outlet, useNavigate } from 'react-router-dom';
-import L from 'leaflet';
+import React, { useState, useEffect, useRef } from 'react';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-import './Report.css'; // Import your CSS file for styling
 
-const ReportPart1 = () => {
-  const [category, setCategory] = useState('education');
-  const [problem, setProblem] = useState('');
-  const [imageFile, setImageFile] = useState(null);
-  const [emergencyStatus, setEmergencyStatus] = useState('notemer');
-  const navigate = useNavigate();
-  return (
-    <div className="max-w-lg mx-auto p-4 border border-gray-300 rounded">
-      <h2 className="text-2xl mb-4">Report Part 1</h2>
-      <div className="mb-4">
-        <label htmlFor="problemcat" className="block text-xl mb-2">
-          Choose the category
-        </label>
-        <select
-          name="problemcat"
-          id="problemcat"
-          className="h-14 w-80 rounded-md m-3 border-gray-400 border-2"
-        >
-          <option value="education">Education</option>
-          <option value="infrastructures">Infrastructures</option>
-          <option value="electricity">Electricity</option>
-          <option value="agriculture">Agriculture </option>
-          <option value="land use">Land Use</option>
-          <option value="health">Health</option>
-          <option value="water supply">Water Supply</option>
-          <option value="drainage">Drainage</option>
-          <option value="culture and religion">Culture and Religion</option>
-          <option value="Security">Security</option>
-          <option value="others">Others</option>
-        </select>
-      </div>
-      <div className="flex justify-center items-center">
-        <textarea
-          id="problem"
-          name="problem"
-          placeholder="Explain your problem here"
-          className="h-20 w-11/12  rounded-md m-3 border-gray-400 border-2"
-          value={problem}
-          onChange={(e) => setProblem(e.target.value)}
-        ></textarea>
-      </div>
-      <div>
-        <label className="text-xl m-3" htmlFor="imageFile">
-          Insert Image
-        </label>{' '}
-        <br />
-        <input
-          type="file"
-          name="imageFile"
-          id="imageFile"
-          className="text-xl m-3"
-          onChange={(e) => setImageFile(e.target.files[0])}
-        />
-      </div>
-      <div>
-        
-        <label htmlFor="emer" className="text-xl m-3">
-          Emergency Status:
-        </label>
-        <select
-          name="emer"
-          id="emer"
-          className="h-14 w-80 rounded-md m-3 border-gray-400 border-2"
-        >
-          <option value="notemer">Not emergency</option>
-          <option value="emergency">High Emergency</option>
-          onChange={(e) => setEmergencyStatus(e.target.value)}
-        </select>
-      </div>
-      <Link to="part2" className="bg-blue-500 text-white px-4 py-2 rounded">
-        Next
-      </Link>
-    </div>
-  );
+
+
+
+const handleMapClick = (e, setPinCoordinates) => {
+  const { lat, lng } = e.latlng;
+  setPinCoordinates({ lat, lng });
 };
-
-const ReportPart2 = () => {
-  // ... (existing JSX for ReportPart2)
-
-  const handleFormSubmit = async () => {
-    try {
-      const formData = new FormData();
-      formData.append('category', category);
-      formData.append('problem', problem);
-      formData.append('imageFile', imageFile);
-      formData.append('emergencyStatus', emergencyStatus);
-
-      const response = await fetch('http://localhost:4000/api/report', {
-        method: 'POST',
-        body: formData,
-      });
-
-      if (response.ok) {
-        console.log('Report submitted successfully!');
-        navigate('/success'); // Redirect to a success page or another route
-      } else {
-        const errorData = await response.json();
-        console.error('Report submission failed:', errorData.message);
-      }
-    } catch (error) {
-      console.error('Error during report submission:', error.message);
-    }
-  };
-
-  const mapRef = React.useRef(null);
+const Report = () => {
+  const mapRef = useRef(null);
   const [pinCoordinates, setPinCoordinates] = useState({ lat: 0, lng: 0 });
 
-  const handleMapClick = (e) => {
-    const { lat, lng } = e.latlng;
-    setPinCoordinates({ lat, lng });
-  };
-
-  React.useEffect(() => {
-    // Initialize the map only if it doesn't exist
+  useEffect(() => {
     if (!mapRef.current) {
       const mapInstance = L.map('map').setView([28.3949, 84.1240], 7);
 
@@ -133,7 +26,6 @@ const ReportPart2 = () => {
 
     const map = mapRef.current;
 
-    // Cleanup function to remove the map when the component unmounts
     return () => {
       if (!map) {
         map.remove();
@@ -141,51 +33,142 @@ const ReportPart2 = () => {
     };
   }, []);
 
+  const handleEmergencyChange = (event) => {
+    // Your implementation for handling emergency change
+  };
+
+
   return (
-    <div className="max-w-lg mx-auto p-4 border border-gray-300 rounded">
-      <h2 className="text-2xl mb-4">Report Part 2</h2>
-      <div className="mb-4">
-        <p className="text-xl mb-2">Pinpoint your location on the map:</p>
-        <div
-          id="map"
-          className="h-64 w-full rounded-md border-gray-400 border-2 mb-4"
-          onClick={handleMapClick}
-        ></div>
-        {pinCoordinates.lat !== 0 && pinCoordinates.lng !== 0 && (
-          <p className="text-xl mb-2">
-            Latitude: {pinCoordinates.lat}, Longitude: {pinCoordinates.lng}
-          </p>
-        )}
+
+    <div className="w-full md:w-2/3 lg:w-1/3 xl:w-1/3 mx-auto mt-4 mb-4">
+      <div className="p-6 border border-gray-600 sm:rounded-md">
+        <form
+          method="POST"
+          action="https://herotofu.com/start"
+          encType="multipart/form-data"
+        >
+         <div>
+          <label className="block mb-2 m-0" htmlFor="problemcat">Choose the category  </label>
+              <select
+              name="problemcat"
+              id="problemcat"
+              className="h-10  block
+              w-full
+              mt-1 rounded-md m-0 mb-2 border-gray-400 border-2"
+            >
+              <option value="education">Education</option>
+              <option value="infrastructures">Infrastructures</option>
+              <option value="electricity">Electricity</option>
+              <option value="agriculture">Agriculture </option>
+              <option value="land use">Land Use</option>
+              <option value="health">Health</option>
+              <option value="water supply">Water Supply</option>
+              <option value="drainage">Drainage</option>
+              <option value="culture and religion">Culture and Religion</option>
+              <option value="Security">Security</option>
+              <option value="others">Others</option>
+            </select>
+            </div>
+               {/* Bug Description Textarea */}
+          <label className="block mb-6">
+            <span className="text-gray-700">Problem Description</span>
+            <textarea
+             id="problem"
+             name="problem"
+              className="
+                block
+                w-full
+                mt-1
+                rounded-md m-0 mb-2 border-gray-400 border-2
+              "
+              rows="3"
+              placeholder="Please add as much details as possible."
+            ></textarea>
+          </label>
+
+          {/* Screenshot Input */}
+          <label className="block mb-6">
+            <span className="text-gray-700">Problem Image</span>
+            <input
+              name="imageFile"
+              type="file"
+              className="
+                block
+                w-full
+                mt-1
+                focus:border-indigo-300
+                focus:ring
+                focus:ring-indigo-200
+                focus:ring-opacity-50
+              "
+            />
+          </label>
+ {/* Emergency Status */}
+          <div>
+            <label htmlFor="emer" className="block mb-2 m-0">
+              Emergency Status:
+            </label>
+            <select
+              name="emer"
+              id="emer"
+              className="h-10 block w-full mt-1 rounded-md m-0 mb-2 border-gray-400 border-2"
+              onChange={handleEmergencyChange}
+            >
+              <option value="notemer">Not emergency</option>
+              <option value="emergency">High Emergency</option>
+            </select>
+          </div>
+
+          {/* Problem Location */}
+          <div>
+            <span className="text-gray-700">Problem Location</span>
+            <div className="flex items-center">
+              <input
+                name="proadd"
+                type="text"
+                className="h-10 block w-full mt-1 rounded-md m-0 mb-2 border-gray-400 border-2"
+              />
+              
+            </div>
+          </div>
+
+
+           {/* Choose Latitude and Longitude from map */}
+           <div>
+            <span className="text-gray-700">
+              Choose Latitude and Longitude from the map
+            </span>
+            {/* Map Container */}
+            <div id="map" style={{ height: '300px', width: '100%' }} />
+          </div>
+
+
+           {/* Submit Button */}
+           <div className="mb-6 mt-4">
+            <button
+              type="submit"
+              className="
+                h-10
+                px-5
+                text-indigo-100
+                bg-gray-700
+                rounded-lg
+                transition-colors
+                duration-150
+                focus:shadow-outline
+                hover:text-indigo-300 
+               
+              "
+            >
+              Submit
+            </button>
+          </div>
+
+         
+        </form>
       </div>
-      <Link to="/Report" className="bg-blue-500 text-white px-4 py-2 rounded">
-        Back to Part 1
-      </Link>
-
-      <Link to="/success"
-        onClick={handleFormSubmit}
-        className="bg-blue-500 text-white px-4 py-2 rounded"
-      >
-        Submit
-      </Link>
     </div>
-  );
-};
-
-
-
-const Report = () => {
-  
-
- 
-  return (
-    <div>
-      <h1 className="text-3xl font-bold mb-4">Report Page</h1>
-      <Routes>
-        <Route path="/" element={<ReportPart1 />} />
-        <Route path="/part2" element={<ReportPart2 />} />
-      </Routes>
-     
-    </div>
+   
   );
 };
 

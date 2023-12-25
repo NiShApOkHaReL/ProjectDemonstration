@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
@@ -8,27 +9,28 @@ const Footer = () => {
           <div className="text-sm uppercase text-indigo-300 font-bold">Menu</div>
           <ul>
             <li className="my-2">
-              <a className="hover:text-indigo-300" href="#">
+              <Link className="hover:text-indigo-300" to="/">
                 Home
-              </a>
+              </Link>
             </li>
             <li className="my-2">
-              <a className="hover:text-indigo-300" href="#">
-                Services
-              </a>
+              <Link className="hover:text-indigo-300" to="/Report">
+                Report Problem
+              </Link>
             </li>
             <li className="my-2">
-              <a className="hover:text-indigo-300" href="#">
-                Products
-              </a>
+              <Link className="hover:text-indigo-300" to="/ViewReport">
+                View Reports
+              </Link>
             </li>
             <li className="my-2">
-              <a className="hover:text-indigo-300" href="#">
-                Pricing
-              </a>
+              <Link className="hover:text-indigo-300" to="/AboutUs">
+                About Us
+              </Link>
             </li>
           </ul>
         </div>
+
         <div className="p-5 sm:w-7/12 border-r text-center">
           <h3 className="font-bold text-xl text-indigo-300 mb-4">Componentity</h3>
           <p className="text-indigo-300 text-sm mb-10">
@@ -36,17 +38,18 @@ const Footer = () => {
             standard dummy text ever since the 1500s.
           </p>
         </div>
+
         <div className="p-5 sm:w-3/12">
           <div className="text-sm uppercase text-indigo-300 font-bold">Contact Us</div>
           <ul>
             <li className="my-2">
               <a className="hover:text-indigo-300" href="#">
-                XXX XXXX, Floor 4 San Francisco, CA
+                XXX XXXX, Bharatpur Metropolitan City, Nepal
               </a>
             </li>
             <li className="my-2">
               <a className="hover:text-indigo-300" href="#">
-                contact@company.com
+                smartmunicipality@gmail.com
               </a>
             </li>
           </ul>

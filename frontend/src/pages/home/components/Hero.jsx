@@ -41,7 +41,7 @@ const Hero = () => {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold mb-4">Home</h1>
+      
       <div id="map" className="w-full h-96"></div>
     </div>
   );

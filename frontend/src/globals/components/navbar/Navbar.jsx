@@ -1,92 +1,67 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import "google-fonts";
+import { Link } from "react-router-dom"; // Import Link from react-router-dom
+// import "./App.css"; // Import your CSS file
 
-const Navbar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+function App() {
+  const [isNavOpen, setNavOpen] = useState(false);
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
+  const toggleNav = () => {
+    setNavOpen(!isNavOpen);
   };
 
-  const history = useNavigate();
-
+  // Define a function to handle navigation to different routes
   const navigateTo = (path) => {
-    history(path);
+    // Implement your navigation logic here
+    // For example, you can use react-router's useHistory hook
+    // to navigate to the specified path
   };
 
   return (
-    <nav className="bg-gray-800 p-3 md:p-9">
-      <div className="container mx-auto flex justify-between items-center">
-        <div className="text-white font-bold text-2xl md:text-3xl lg:text-4xl font-serif">
+    <nav className="flex items-center bg-gray-800 p-3 flex-wrap">
+      <Link
+        to="/"
+        className="p-2 mr-4 inline-flex items-center"
+      >
+        {/* SVG code here */}
+        <span className="text-xl text-white font-bold uppercase tracking-wide">
           Smart Municipality
-        </div>
-        <div className="hidden md:flex space-x-4">
-          <Link
-            to="/"
-            className="bg-transparent hover:bg-gray-900 text-white font-bold py-2 px-4 border-fb923c-dark border-2 rounded-full transition-all duration-300"
+        </span>
+      </Link>
+      <button
+        className="text-white inline-flex p-3 hover:bg-gray-900 rounded lg:hidden ml-auto hover:text-white outline-none nav-toggler"
+        onClick={toggleNav}
+      >
+        <i className="material-icons">menu</i>
+      </button>
+      <div
+        className={`${
+          isNavOpen ? "block" : "hidden"
+        } lg:inline-flex lg:flex-grow lg:w-auto w-full`}
+        id="navigation"
+      >
+        {/* Navigation links */}
+        <div className="lg:inline-flex lg:flex-row lg:ml-auto lg:w-auto w-full lg:items-center items-start flex flex-col lg:h-auto">
+          {/* Replace the '#' with your actual link URLs */}
+          {[
+            { to: "/", text: "Home" },
+            { to: "/Report", text: "Report Problem" },
+            { to: "/ViewReport", text: "View Reports" },
+            { to: "/AboutUs", text: "About Us" },
+            { to: "/logout", text: "Logout" },
+          ].map((link, index) => (
+            <Link
+              key={index}
+              to={link.to}
+              className="lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-white items-center justify-center hover:bg-gray-900 hover:text-indigo-300"
+              onClick={() => navigateTo(link.to)}
             >
-            Home
-          </Link>
-          <Link
-            to="/Report"
-            className="bg-transparent hover:bg-gray-900 text-white font-bold py-2 px-4 border-fb923c-dark border-2 rounded-full transition-all duration-300"
-          >
-            Report Problem
-          </Link>
-          <Link
-            to="/ViewReport"
-            className="bg-transparent hover:bg-gray-900 text-white font-bold py-2 px-4 border-fb923c-dark border-2 rounded-full transition-all duration-300"
-          >
-            View Reports
-          </Link>
-          <Link
-            to="/help"
-            className="bg-transparent hover:bg-gray-900 text-white font-bold py-2 px-4 border-fb923c-dark border-2 rounded-full transition-all duration-300"
-          >
-            About Us
-          </Link>
-          <Link
-            to="/logout"
-            className="bg-transparent hover:bg-gray-900 text-white font-bold py-2 px-4 border-fb923c-dark border-2 rounded-full transition-all duration-300"
-          >
-            Logout
-          </Link>
-        </div>
-        {/* Add a responsive menu button for small screens */}
-        <div className="md:hidden">
-          <button className="text-white" onClick={toggleMenu}>
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h16m-7 6h7"
-              ></path>
-            </svg>
-          </button>
-          {isMenuOpen && (
-            <div className="flex flex-col items-center mt-2">
-              
-              <Link to="/">Home</Link>
-              <Link to="/Report">Report Problem</Link>
-              <Link to="/ViewReport">View Your Report</Link>
-              <Link to="/help">Help</Link>
-              <Link to = "/logout" className="text-white hover:underline">Logout</Link>
-              
-            </div>
-          )}
+              <span>{link.text}</span>
+            </Link>
+          ))}
         </div>
       </div>
     </nav>
   );
-};
+}
 
-export default Navbar;
+export default App;
