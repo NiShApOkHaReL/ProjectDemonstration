@@ -31,6 +31,8 @@ const Login = () => {
         console.log('Login successful');
          // Redirect to the main page after successful login
         //  history.push('/'); // Replace with your main page route
+        history.push('/'); 
+        
       
       } else {
         const errorData = await response.json();
