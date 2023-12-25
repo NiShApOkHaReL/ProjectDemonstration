@@ -25,31 +25,31 @@ const Navbar = () => {
         <div className="hidden md:flex space-x-4">
           <Link
             to="/"
-            className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 border border-red-700 rounded-full transition-all duration-300"
-          >
+            className="bg-transparent hover:bg-purple-700 text-white font-bold py-2 px-4 border-fb923c-dark border-2 rounded-full transition-all duration-300"
+            >
             Home
           </Link>
           <Link
             to="/Report"
-            className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 border border-red-700 rounded-full transition-all duration-300"
+            className="bg-transparent hover:bg-purple-700 text-white font-bold py-2 px-4 border-fb923c-dark border-2 rounded-full transition-all duration-300"
           >
             Report Problem
           </Link>
           <Link
             to="/ViewReport"
-            className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 border border-red-700 rounded-full transition-all duration-300"
+            className="bg-transparent hover:bg-purple-700 text-white font-bold py-2 px-4 border-fb923c-dark border-2 rounded-full transition-all duration-300"
           >
             View Your Report
           </Link>
           <Link
             to="/help"
-            className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 border border-red-700 rounded-full transition-all duration-300"
+            className="bg-transparent hover:bg-purple-700 text-white font-bold py-2 px-4 border-fb923c-dark border-2 rounded-full transition-all duration-300"
           >
-            Help
+            About Us
           </Link>
           <Link
             to="/logout"
-            className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 border border-red-700 rounded-full transition-all duration-300"
+            className="bg-transparent hover:bg-purple-700 text-white font-bold py-2 px-4 border-fb923c-dark border-2 rounded-full transition-all duration-300"
           >
             Logout
           </Link>
