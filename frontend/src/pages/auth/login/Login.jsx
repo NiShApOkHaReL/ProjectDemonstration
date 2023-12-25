@@ -1,11 +1,9 @@
 import React, { useState } from "react";
-// import { useHistory } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // const history = useHistory(); // Add this line to get the history object
   const navigate = useNavigate();
 
   const handleLogin = async () => {
@@ -20,13 +18,10 @@ const Login = () => {
 
       if (response.ok) {
         const data = await response.json();
-        // Assuming your backend sends a token upon successful login
         const token = data.data;
 
-        // Store the token in localStorage or a state management solution
         localStorage.setItem("token", token);
 
-        // Redirect or perform any other action after successful login
         console.log("Login successful");
         
         navigate("/");
