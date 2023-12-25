@@ -1,11 +1,18 @@
+
+
 // Report.js
 import React, { useState } from 'react';
-import { Route, Routes, Link, Outlet } from 'react-router-dom';
+import { Route, Routes, Link, Outlet, useNavigate } from 'react-router-dom';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import './Report.css'; // Import your CSS file for styling
 
 const ReportPart1 = () => {
+  const [category, setCategory] = useState('education');
+  const [problem, setProblem] = useState('');
+  const [imageFile, setImageFile] = useState(null);
+  const [emergencyStatus, setEmergencyStatus] = useState('notemer');
+  const navigate = useNavigate();
   return (
     <div className="max-w-lg mx-auto p-4 border border-gray-300 rounded">
       <h2 className="text-2xl mb-4">Report Part 1</h2>
@@ -37,6 +44,8 @@ const ReportPart1 = () => {
           name="problem"
           placeholder="Explain your problem here"
           className="h-20 w-11/12  rounded-md m-3 border-gray-400 border-2"
+          value={problem}
+          onChange={(e) => setProblem(e.target.value)}
         ></textarea>
       </div>
       <div>
@@ -49,10 +58,11 @@ const ReportPart1 = () => {
           name="imageFile"
           id="imageFile"
           className="text-xl m-3"
+          onChange={(e) => setImageFile(e.target.files[0])}
         />
       </div>
       <div>
-        <p className="text-xl m-3">How much emergency is your problem?</p>
+        
         <label htmlFor="emer" className="text-xl m-3">
           Emergency Status:
         </label>
@@ -63,6 +73,7 @@ const ReportPart1 = () => {
         >
           <option value="notemer">Not emergency</option>
           <option value="emergency">High Emergency</option>
+          onChange={(e) => setEmergencyStatus(e.target.value)}
         </select>
       </div>
       <Link to="part2" className="bg-blue-500 text-white px-4 py-2 rounded">
@@ -73,6 +84,33 @@ const ReportPart1 = () => {
 };
 
 const ReportPart2 = () => {
+  // ... (existing JSX for ReportPart2)
+
+  const handleFormSubmit = async () => {
+    try {
+      const formData = new FormData();
+      formData.append('category', category);
+      formData.append('problem', problem);
+      formData.append('imageFile', imageFile);
+      formData.append('emergencyStatus', emergencyStatus);
+
+      const response = await fetch('http://localhost:4000/api/report', {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (response.ok) {
+        console.log('Report submitted successfully!');
+        navigate('/success'); // Redirect to a success page or another route
+      } else {
+        const errorData = await response.json();
+        console.error('Report submission failed:', errorData.message);
+      }
+    } catch (error) {
+      console.error('Error during report submission:', error.message);
+    }
+  };
+
   const mapRef = React.useRef(null);
   const [pinCoordinates, setPinCoordinates] = useState({ lat: 0, lng: 0 });
 
@@ -84,7 +122,7 @@ const ReportPart2 = () => {
   React.useEffect(() => {
     // Initialize the map only if it doesn't exist
     if (!mapRef.current) {
-      const mapInstance = L.map('map').setView([0, 0], 13);
+      const mapInstance = L.map('map').setView([28.3949, 84.1240], 7);
 
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '© OpenStreetMap contributors',
@@ -97,7 +135,7 @@ const ReportPart2 = () => {
 
     // Cleanup function to remove the map when the component unmounts
     return () => {
-      if (map) {
+      if (!map) {
         map.remove();
       }
     };
@@ -122,15 +160,23 @@ const ReportPart2 = () => {
       <Link to="/Report" className="bg-blue-500 text-white px-4 py-2 rounded">
         Back to Part 1
       </Link>
+
+      <Link to="/success"
+        onClick={handleFormSubmit}
+        className="bg-blue-500 text-white px-4 py-2 rounded"
+      >
+        Submit
+      </Link>
     </div>
   );
 };
 
 
 
-
-
 const Report = () => {
+  
+
+ 
   return (
     <div>
       <h1 className="text-3xl font-bold mb-4">Report Page</h1>
@@ -138,7 +184,7 @@ const Report = () => {
         <Route path="/" element={<ReportPart1 />} />
         <Route path="/part2" element={<ReportPart2 />} />
       </Routes>
-      <Outlet />
+     
     </div>
   );
 };
