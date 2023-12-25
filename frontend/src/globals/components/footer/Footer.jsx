@@ -2,7 +2,7 @@ import React from 'react';
 
 const Footer = () => {
   return (
-    <div className="bg-purple-800 text-white">
+    <div className="bg-gray-800 text-white">
       <div className="max-w-screen-lg py-10 px-4 sm:px-6 sm:flex justify-between mx-auto">
         <div className="p-5 sm:w-2/12 border-r">
           <div className="text-sm uppercase text-indigo-300 font-bold">Menu</div>
