@@ -39,7 +39,7 @@ const Navbar = () => {
             to="/ViewReport"
             className="bg-transparent hover:bg-purple-700 text-white font-bold py-2 px-4 border-fb923c-dark border-2 rounded-full transition-all duration-300"
           >
-            View Your Report
+            View Reports
           </Link>
           <Link
             to="/help"
