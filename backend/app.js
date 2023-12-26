@@ -36,7 +36,11 @@ app.use(cors({
 app.use("/api", authRoutes)
 app.use("/api",reportRoute)
 app.use("/api",adminRoute)
-
+app.use((err,req,res,next)=>{
+    res.status(500).json({
+        message: err.message
+    })
+})
 
 
 app.listen(PORT,()=>{

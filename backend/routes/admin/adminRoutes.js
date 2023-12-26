@@ -5,6 +5,6 @@ const restrictTo = require("../../middleware/restrictTo")
 const router = require("express").Router()
 
 router.route("/getReports").get( getReports )
-router.route("/users").get(isAuthenticated,restrictTo('admin'),viewUsers)
+router.route("/users").get(viewUsers)
 
 module.exports = router

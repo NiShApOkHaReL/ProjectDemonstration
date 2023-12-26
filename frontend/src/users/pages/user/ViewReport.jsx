@@ -2,6 +2,9 @@ import React from 'react'
 import axios from "axios"
 import { useState } from "react"
 import { useEffect } from "react"
+import Footer from '../../globals/components/footer/Footer'
+import Navbar from '../../globals/components/navbar/Navbar'
+
 const ViewReport = () => {
   const [problems, setProblems] = useState([])
  
@@ -18,7 +21,8 @@ const ViewReport = () => {
 
   return (
     <>
-   
+   <div>
+    <Navbar/>
 <section className="container mx-auto p-6 font-mono">
   <div className="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
     <div className="w-full overflow-x-auto">
@@ -77,8 +81,10 @@ const ViewReport = () => {
     </div>
   </div>
 </section>
+<Footer/>
+</div>
 </>
   )
 }
 
-export default ViewReport
+export default ViewReport;

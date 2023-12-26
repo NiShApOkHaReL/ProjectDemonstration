@@ -1,0 +1,13 @@
+#map {
+  height: 400px; /* Adjust the height as needed */
+}
+
+.map-container {
+  height: 300px;
+  width: 100%;
+}
+
+.map {
+  height: 100%;
+  width: 100%;
+}

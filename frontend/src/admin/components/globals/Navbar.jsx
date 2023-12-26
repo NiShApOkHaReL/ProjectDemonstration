@@ -19,12 +19,12 @@ function App() {
   return (
     <nav className="flex items-center bg-gray-800 p-3 flex-wrap">
       <Link
-        to="/"
+        to="/admin"
         className="p-2 mr-4 inline-flex items-center"
       >
         {/* SVG code here */}
         <span className="text-xl text-white font-bold uppercase tracking-wide">
-          Smart Municipality
+          Admin Dashboard
         </span>
       </Link>
       <button
@@ -43,11 +43,11 @@ function App() {
         <div className="lg:inline-flex lg:flex-row lg:ml-auto lg:w-auto w-full lg:items-center items-start flex flex-col lg:h-auto">
           {/* Replace the '#' with your actual link URLs */}
           {[
-            { to: "/", text: "Home" },
-            { to: "/Report", text: "Report Problem" },
-            { to: "/ViewReport", text: "View Reports" },
-            { to: "/AboutUs", text: "About Us" },
-            { to: "/logout", text: "Logout" },
+            { to: "/admin", text: "Home" },
+            
+            { to: "/admin/adminviewreport", text: "View Reports" },
+            { to: "/admin/ViewUsers", text: "View Users" },
+            
           ].map((link, index) => (
             <Link
               key={index}
